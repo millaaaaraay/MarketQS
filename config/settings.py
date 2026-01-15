@@ -17,9 +17,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # =========================================================
 # SECURITY
 # =========================================================
-SECRET_KEY = 'django-insecure-#mv_e_-3v-v#dl-6p@2fssa@dgufhsdw!2(299fb^$-ff7w9h$'
-DEBUG = True
-ALLOWED_HOSTS = ['*']
+SECRET_KEY = os.environ.get('SECRET_KEY', 'unsafe-secret-key')
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
 
 
 
@@ -43,12 +49,15 @@ INSTALLED_APPS = [
 # =========================================================
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -85,7 +94,9 @@ TEMPLATES = [
 # =========================================================
 DATABASES = {
     'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3'
+        default='sqlite:///db.sqlite3',
+        conn_max_age=600,
+        ssl_require=True
     )
 }
 
@@ -134,3 +145,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # DEFAULT PRIMARY KEY
 # =========================================================
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
