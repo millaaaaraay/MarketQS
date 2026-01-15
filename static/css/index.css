@@ -1,0 +1,409 @@
+/* ========== VARIABLES Y TEMAS ========== */
+:root {
+    /* Tema Claro (DÍA) */
+    --purple-laika: #603085;
+    --purple-gradient: linear-gradient(135deg, #603085, #7a44a3);
+    --yellow-laika: #ffc107;
+    --green-buy: #45a049;
+    --bg-light: #f4f4f7;
+    --card-bg: #ffffff;
+    --text-main: #333333;
+    --text-muted: #6c757d;
+    --border-color: #e0e0e0;
+    --radius-lg: 25px;
+    --radius-md: 18px;
+    
+    /* Variable para nombres, títulos y precios dinámicos */
+    --text-accent-dynamic: #603085; /* MORADO EN EL DÍA */
+    --accent-dynamic: #603085;
+}
+
+[data-theme="dark"] {
+    /* Tema Oscuro (NOCHE) */
+    --bg-light: #0f0f12;
+    --card-bg: #1a1a1e;
+    --text-main: #f5f5f5;
+    --text-muted: #a0a0a0;
+    --border-color: #2d2d35;
+    --purple-gradient: linear-gradient(135deg, #2a153d, #4a2366);
+    
+    /* Variable para nombres, títulos y precios dinámicos */
+    --text-accent-dynamic: #ffc107; /* AMARILLO EN LA NOCHE */
+    --accent-dynamic: #ffc107;
+}
+
+/* ========== ESTILOS BASE ========== */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Forzar colores de texto para encabezados en modo oscuro */
+[data-theme="dark"] .text-dark, 
+[data-theme="dark"] h1, [data-theme="dark"] h2, 
+[data-theme="dark"] h3, [data-theme="dark"] h4, 
+[data-theme="dark"] h6 {
+    color: var(--text-main) !important;
+}
+
+[data-theme="dark"] .text-muted, 
+[data-theme="dark"] .text-secondary {
+    color: var(--text-muted) !important;
+}
+
+/* ========== NAVBAR RESPONSIVA ========== */
+.navbar-main {
+    background: var(--purple-gradient);
+    padding: 10px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.navbar-brand span {
+    color: var(--yellow-laika);
+}
+
+.search-bar {
+    background-color: var(--card-bg) !important;
+    color: var(--text-main) !important;
+    border: 2px solid transparent;
+    border-radius: 25px 0 0 25px;
+    padding: 10px 20px;
+    caret-color: var(--text-accent-dynamic);
+}
+
+[data-theme="dark"] .search-bar::placeholder {
+    color: var(--text-muted) !important;
+    opacity: 1;
+}
+
+[data-theme="dark"] .search-bar {
+    border-color: var(--border-color);
+}
+
+.search-btn {
+    border-radius: 0 25px 25px 0;
+    background: var(--yellow-laika);
+    color: var(--purple-laika);
+    border: none;
+    padding: 0 20px;
+    font-weight: bold;
+}
+
+/* ========== ASIDE / CATEGORÍAS ========== */
+.card-category {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color) !important;
+    transition: background-color 0.3s;
+}
+
+.category-link {
+    color: var(--text-muted);
+    transition: 0.3s;
+    font-weight: 400;
+}
+
+.category-link:hover {
+    color: var(--text-accent-dynamic);
+}
+
+.category-link.active {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+/* ========== TARJETAS DE PRODUCTO Y MODAL ========== */
+.product-card {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    background-color: var(--card-bg) !important;
+    transition: all 0.3s ease;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.product-title, 
+.product-cant-label, 
+.price-now,
+.modal-content h2,
+.modal-content .h2.fw-bold { 
+    color: var(--text-accent-dynamic) !important;
+    transition: color 0.3s;
+}
+
+.price-now {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.discount-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #ff4757;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    z-index: 5;
+}
+
+/* ========== BOTONES ========== */
+.btn-outline-purple {
+    border: 2px solid var(--text-accent-dynamic) !important;
+    color: var(--text-accent-dynamic) !important;
+    background: transparent !important;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-purple:hover {
+    background: var(--text-accent-dynamic) !important;
+    color: var(--card-bg) !important;
+}
+
+.add-to-cart-form button[type="submit"] {
+    background: var(--purple-laika) !important;
+    border: none;
+    border-radius: 50px;
+    color: white !important;
+}
+
+/* ========== SELECTOR DE CANTIDAD ========== */
+.input-group.input-group-sm {
+    border: 1.5px solid var(--text-accent-dynamic) !important;
+    border-radius: 50px;
+    background: transparent;
+}
+
+.btn-qty {
+    color: var(--text-accent-dynamic) !important;
+    font-weight: bold;
+    border: none;
+    background: none;
+}
+
+.input-qty {
+    background: transparent !important;
+    color: var(--text-main) !important;
+    border: none !important;
+}
+
+/* ========== MODAL ========== */
+.modal-content {
+    background-color: var(--card-bg);
+    color: var(--text-main);
+}
+
+[data-theme="dark"] .bg-modal-img {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="dark"] .btn-close {
+    filter: invert(1);
+}
+
+[data-theme="dark"] .btn-success {
+    background-color: #4cd137 !important;
+    border: none;
+}
+
+/* ========== CATEGORÍAS (CÍRCULOS) ========== */
+.cat-circle {
+    width: 70px;
+    height: 70px;
+    background: var(--card-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    color: var(--text-accent-dynamic);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cat-circle:hover {
+    background: var(--text-accent-dynamic);
+    color: var(--card-bg);
+    transform: scale(1.1);
+}
+
+/* ========== FOOTER RESPONSIVO (CORREGIDO) ========== */
+footer {
+    background: var(--purple-gradient) !important;
+    color: #ffffff !important;
+    padding: 40px 0 20px;
+    margin-top: 50px;
+}
+
+/* Títulos: Siempre amarillos en cualquier modo */
+footer h5 {
+    color: var(--yellow-laika) !important;
+    font-weight: bold !important;
+}
+
+/* Contenido general: Siempre blanco por defecto */
+footer p, 
+footer li, 
+footer i, 
+footer .small, 
+footer .footer-bottom p {
+    color: #ffffff !important;
+}
+
+/* Enlaces: Blancos por defecto, amarillos al pasar el mouse */
+footer a {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    transition: 0.3s ease;
+}
+
+footer a:hover, 
+footer a:hover i {
+    color: var(--yellow-laika) !important;
+}
+
+/* Separador del fondo */
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+    margin-top: 40px;
+}
+
+/* MODO OSCURO: Refuerzo para asegurar que solo h5 sea amarillo */
+[data-theme="dark"] footer h5 {
+    color: var(--yellow-laika) !important;
+}
+
+[data-theme="dark"] footer p, 
+[data-theme="dark"] footer a, 
+[data-theme="dark"] footer i {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] footer a:hover {
+    color: var(--yellow-laika) !important;
+}
+
+/* ========== MEDIA QUERIES PARA RESPONSIVIDAD ========== */
+@media (max-width: 768px) {
+    .price-now { font-size: 1.2rem; }
+    .product-card { border-radius: 15px; }
+    .cat-circle { width: 60px; height: 60px; font-size: 1.2rem; }
+    .navbar-brand { font-size: 1.6rem !important; }
+}
+
+/* ========== ANIMACIONES ========== */
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+}
+
+/* ========== CORRECCIONES DE MARCA (BADGES) ========== */
+.badge.bg-light.text-dark {
+    background-color: rgba(96, 48, 133, 0.1) !important;
+    color: var(--purple-laika) !important;
+    font-weight: 600;
+}
+
+[data-theme="dark"] .badge.bg-light.text-dark,
+[data-theme="dark"] .modal-content .badge {
+    background-color: rgba(255, 193, 7, 0.2) !important;
+    color: var(--yellow-laika) !important;
+    border: 1px solid rgba(255, 193, 7, 0.4) !important;
+}
+
+[data-theme="dark"] .modal .btn-link {
+    color: var(--yellow-laika) !important;
+}
+
+.badge-cart {
+    background-color: var(--yellow-laika);
+    color: var(--purple-laika);
+}
+
+/* ================= FOOTER FIJO - COLORES FORZADOS ================= */
+
+.footer-fixed {
+    background: var(--purple-gradient);
+    padding: 40px 0 20px;
+}
+
+/* TODO BLANCO */
+.footer-fixed,
+.footer-fixed p,
+.footer-fixed a,
+.footer-fixed li,
+.footer-fixed i,
+.footer-fixed span {
+    color: #ffffff !important;
+}
+
+/* TÍTULOS AMARILLOS */
+.footer-fixed h5 {
+    color: var(--yellow-laika) !important;
+    font-weight: 700;
+}
+
+/* LINKS */
+.footer-fixed a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+/* HOVER */
+.footer-fixed a:hover,
+.footer-fixed a:hover i {
+    color: var(--yellow-laika) !important;
+}
+
+/* ICONOS SOCIALES */
+.footer-fixed .social-icons i {
+    font-size: 1.2rem;
+}
+
+/* SEPARADOR */
+.footer-fixed .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+/* DARK MODE — NO CAMBIA */
+[data-theme="dark"] .footer-fixed,
+[data-theme="dark"] .footer-fixed * {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .footer-fixed h5 {
+    color: var(--yellow-laika) !important;
+}
+
+
+/* ===============================
+   CATEGORÍAS – COLOR TÍTULO
+   =============================== */
+
+/* Modo claro (como ya lo tienes) */
+.card-category h5 {
+    color: var(--purple-laika) !important;
+}
+
+/* Modo oscuro → AMARILLO */
+[data-theme="dark"] .card-category h5 {
+    color: var(--yellow-laika) !important;
+}
