@@ -126,14 +126,17 @@ FORMAT_MODULE_PATH = ['config.formats']
 # =========================================================
 # STATIC FILES
 # =========================================================
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
-if not DEBUG:
-    # Asegúrate de que BASE_DIR esté definido arriba en tu archivo
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # tu carpeta de CSS, JS, imágenes
+]
 
-# Corrección de comillas y nombre del storage
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # donde Django copiará todos los estáticos
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 # =========================================================
 # DEFAULT PRIMARY KEY
 # =========================================================
