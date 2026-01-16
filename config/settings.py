@@ -89,7 +89,7 @@ TEMPLATES = [
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='sqlite:///dbsqlite3',
+        default='sqlite:///db.sqlite3',
         conn_max_age=600
     )
 }
