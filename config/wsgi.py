@@ -14,3 +14,11 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 
 application = get_wsgi_application()
+
+
+
+# Intentar crear superusuario automáticamente
+try:
+    from ventas import create_admin
+except Exception as e:
+    print(f"No se pudo crear superusuario automáticamente: {e}")
