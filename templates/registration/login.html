@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center"
+     style="min-height: 70vh;">
+
+    <div class="card shadow-lg border-0 p-4 p-md-5 auth-card">
+
+        <div class="text-center mb-4">
+            <div class="display-4 mb-2 auth-icon">
+                <i class="fas fa-user-lock"></i>
+            </div>
+            <h2 class="fw-bold">¡Hola de nuevo!</h2>
+            <p class="text-secondary small">
+                Ingresa tus datos para continuar comprando
+            </p>
+        </div>
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div class="alert alert-danger small py-2 rounded-pill text-center">
+                    Usuario o contraseña incorrectos.
+                </div>
+            {% endif %}
+
+            <!-- Usuario -->
+            <div class="mb-3">
+                <label class="form-label small fw-bold">Nombre de usuario</label>
+                <div class="input-group auth-input">
+                    <span class="input-group-text">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    <input type="text"
+                           name="username"
+                           class="form-control"
+                           placeholder="Ej: JuanPerez"
+                           required>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+                <label class="form-label small fw-bold">Contraseña</label>
+                <div class="input-group auth-input">
+                    <span class="input-group-text">
+                        <i class="fas fa-key"></i>
+                    </span>
+                    <input type="password"
+                           name="password"
+                           class="form-control"
+                           placeholder="••••••••"
+                           required>
+                </div>
+
+                <div class="text-end mt-2">
+                    <a href="{% url 'password_reset' %}"
+                       class="small auth-link">
+                        ¿Olvidaste tu clave?
+                    </a>
+                </div>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary w-100 rounded-pill py-2 fw-bold">
+                Iniciar Sesión
+            </button>
+        </form>
+
+        <div class="text-center mt-4">
+            <p class="small text-muted mb-1">¿Aún no tienes cuenta?</p>
+            <a href="{% url 'registro' %}"
+               class="fw-bold auth-link">
+                Regístrate aquí
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+/* =============================
+   CARD LOGIN
+   ============================= */
+.auth-card {
+    max-width: 450px;
+    width: 100%;
+    border-radius: var(--radius-lg);
+    background-color: var(--card-bg);
+    color: var(--text-main);
+    border-top: 5px solid var(--accent-dynamic);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.auth-icon {
+    color: var(--accent-dynamic);
+}
+
+/* =============================
+   INPUTS
+   ============================= */
+.auth-input .input-group-text {
+    background-color: var(--card-bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    border-right: 0;
+    border-radius: 50px 0 0 50px;
+}
+
+.auth-input .form-control {
+    background-color: var(--card-bg);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    border-left: 0;
+    border-radius: 0 50px 50px 0;
+}
+
+.auth-input .form-control::placeholder {
+    color: var(--text-muted);
+    opacity: 1;
+}
+
+.auth-input .form-control:focus {
+    border-color: var(--accent-dynamic);
+    box-shadow: none;
+}
+
+/* =============================
+   LINKS
+   ============================= */
+.auth-link {
+    color: var(--text-accent-dynamic);
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.auth-link:hover {
+    opacity: 0.8;
+}
+
+/* =============================
+   BOTÓN
+   ============================= */
+.btn-primary {
+    background: var(--accent-dynamic);
+    border: none;
+    color: var(--card-bg);
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+</style>
+{% endblock %}

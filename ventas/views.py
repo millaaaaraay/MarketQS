@@ -162,3 +162,20 @@ def catalogo_agua(request):
         'current_category': current_category
     })
 
+from django.contrib.auth import login
+from .forms import RegistroForm
+
+def registro(request):
+    if request.method == "POST":
+        form = RegistroForm(request.POST)
+        if form.is_valid():
+            usuario = form.save()  # Aquí es donde se guarda en la base de datos
+            login(request, usuario)
+            messages.success(request, "¡Registro exitoso!")
+            return redirect('catalogo')
+        else:
+            # Si el formulario no es válido, esto imprimirá el motivo en tu terminal
+            print(form.errors) 
+    else:
+        form = RegistroForm()
+    return render(request, 'registration/registro.html', {'form': form})
