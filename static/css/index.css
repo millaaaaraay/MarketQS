@@ -44,7 +44,6 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* Forzar colores de texto para encabezados en modo oscuro */
 [data-theme="dark"] .text-dark, 
 [data-theme="dark"] h1, [data-theme="dark"] h2, 
 [data-theme="dark"] h3, [data-theme="dark"] h4, 
@@ -221,7 +220,7 @@ body {
     border: none;
 }
 
-/* ========== CATEGORÍAS (CÍRCULOS) ========== */
+/* ========== CATEGORÍAS (CÍRCULOS Y TEXTOS) ========== */
 .cat-circle {
     width: 70px;
     height: 70px;
@@ -235,7 +234,7 @@ body {
     color: var(--text-accent-dynamic);
     font-size: 1.5rem;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s;
 }
 
 .cat-circle:hover {
@@ -244,7 +243,71 @@ body {
     transform: scale(1.1);
 }
 
-/* ========== FOOTER RESPONSIVO (CORREGIDO) ========== */
+.cat-circle + p {
+    color: var(--text-main);
+    font-weight: 500;
+    text-align: center;
+    transition: color 0.3s;
+}
+
+[data-theme="dark"] .cat-circle + p {
+    color: #ffffff !important;
+}
+
+.cat-circle:hover + p {
+    color: var(--card-bg);
+}
+
+/* ===============================
+   CATEGORÍA ACTIVA (INDEX O VISTA)
+   =============================== */
+.cat-circle.active {
+    background: var(--text-accent-dynamic);
+    color: var(--card-bg);
+    transform: scale(1.1);
+}
+
+.cat-circle.active + p {
+    font-weight: 700;
+    color: var(--text-accent-dynamic);
+}
+
+/* ===============================
+   ANIMACIÓN ESPECIAL PARA AGUA
+   =============================== */
+.cat-circle.active-water:hover i {
+    animation: water-drop 0.8s ease-in-out;
+}
+
+@keyframes water-drop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2) translateY(2px); }
+    100% { transform: scale(1); }
+}
+
+/* ===============================
+   MODO OSCURO
+   =============================== */
+[data-theme="dark"] .cat-circle.active {
+    background: var(--text-accent-dynamic);
+    color: var(--card-bg);
+}
+
+[data-theme="dark"] .cat-circle.active + p {
+    color: var(--text-accent-dynamic);
+}
+
+/* ===============================
+   RESPONSIVIDAD
+   =============================== */
+@media (max-width: 768px) {
+    .price-now { font-size: 1.2rem; }
+    .product-card { border-radius: 15px; }
+    .cat-circle { width: 60px; height: 60px; font-size: 1.2rem; }
+    .navbar-brand { font-size: 1.6rem !important; }
+}
+
+/* ========== FOOTER ================= */
 footer {
     background: var(--purple-gradient) !important;
     color: #ffffff !important;
@@ -252,13 +315,11 @@ footer {
     margin-top: 50px;
 }
 
-/* Títulos: Siempre amarillos en cualquier modo */
 footer h5 {
     color: var(--yellow-laika) !important;
     font-weight: bold !important;
 }
 
-/* Contenido general: Siempre blanco por defecto */
 footer p, 
 footer li, 
 footer i, 
@@ -267,7 +328,6 @@ footer .footer-bottom p {
     color: #ffffff !important;
 }
 
-/* Enlaces: Blancos por defecto, amarillos al pasar el mouse */
 footer a {
     color: #ffffff !important;
     text-decoration: none !important;
@@ -279,131 +339,8 @@ footer a:hover i {
     color: var(--yellow-laika) !important;
 }
 
-/* Separador del fondo */
 .footer-bottom {
     border-top: 1px solid rgba(255,255,255,0.1);
     padding-top: 20px;
     margin-top: 40px;
-}
-
-/* MODO OSCURO: Refuerzo para asegurar que solo h5 sea amarillo */
-[data-theme="dark"] footer h5 {
-    color: var(--yellow-laika) !important;
-}
-
-[data-theme="dark"] footer p, 
-[data-theme="dark"] footer a, 
-[data-theme="dark"] footer i {
-    color: #ffffff !important;
-}
-
-[data-theme="dark"] footer a:hover {
-    color: var(--yellow-laika) !important;
-}
-
-/* ========== MEDIA QUERIES PARA RESPONSIVIDAD ========== */
-@media (max-width: 768px) {
-    .price-now { font-size: 1.2rem; }
-    .product-card { border-radius: 15px; }
-    .cat-circle { width: 60px; height: 60px; font-size: 1.2rem; }
-    .navbar-brand { font-size: 1.6rem !important; }
-}
-
-/* ========== ANIMACIONES ========== */
-@keyframes bounce {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.3); }
-}
-
-/* ========== CORRECCIONES DE MARCA (BADGES) ========== */
-.badge.bg-light.text-dark {
-    background-color: rgba(96, 48, 133, 0.1) !important;
-    color: var(--purple-laika) !important;
-    font-weight: 600;
-}
-
-[data-theme="dark"] .badge.bg-light.text-dark,
-[data-theme="dark"] .modal-content .badge {
-    background-color: rgba(255, 193, 7, 0.2) !important;
-    color: var(--yellow-laika) !important;
-    border: 1px solid rgba(255, 193, 7, 0.4) !important;
-}
-
-[data-theme="dark"] .modal .btn-link {
-    color: var(--yellow-laika) !important;
-}
-
-.badge-cart {
-    background-color: var(--yellow-laika);
-    color: var(--purple-laika);
-}
-
-/* ================= FOOTER FIJO - COLORES FORZADOS ================= */
-
-.footer-fixed {
-    background: var(--purple-gradient);
-    padding: 40px 0 20px;
-}
-
-/* TODO BLANCO */
-.footer-fixed,
-.footer-fixed p,
-.footer-fixed a,
-.footer-fixed li,
-.footer-fixed i,
-.footer-fixed span {
-    color: #ffffff !important;
-}
-
-/* TÍTULOS AMARILLOS */
-.footer-fixed h5 {
-    color: var(--yellow-laika) !important;
-    font-weight: 700;
-}
-
-/* LINKS */
-.footer-fixed a {
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-/* HOVER */
-.footer-fixed a:hover,
-.footer-fixed a:hover i {
-    color: var(--yellow-laika) !important;
-}
-
-/* ICONOS SOCIALES */
-.footer-fixed .social-icons i {
-    font-size: 1.2rem;
-}
-
-/* SEPARADOR */
-.footer-fixed .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.2);
-}
-
-/* DARK MODE — NO CAMBIA */
-[data-theme="dark"] .footer-fixed,
-[data-theme="dark"] .footer-fixed * {
-    color: #ffffff !important;
-}
-
-[data-theme="dark"] .footer-fixed h5 {
-    color: var(--yellow-laika) !important;
-}
-
-
-/* ===============================
-   CATEGORÍAS – COLOR TÍTULO
-   =============================== */
-
-/* Modo claro (como ya lo tienes) */
-.card-category h5 {
-    color: var(--purple-laika) !important;
-}
-
-/* Modo oscuro → AMARILLO */
-[data-theme="dark"] .card-category h5 {
-    color: var(--yellow-laika) !important;
 }
